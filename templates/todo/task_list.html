@@ -21,7 +21,7 @@
 {% block content %}
   <h1>
     TODO List
-    <a href="#" class="btn btn-primary link-to-page">
+    <a href="{% url 'todo:task-create' %}" class="btn btn-primary link-to-page">
       Add task
     </a>
   </h1>
@@ -34,10 +34,10 @@
         <strong>{{ task.description }}</strong>
         {% if not task.completed %}
           <span style="color: red;">Not done</span>
-          <a href="#" class="btn btn-success link-to-page">Complete</a>
+          <a href="{% url 'todo:completed-status-change' pk=task.id %}" class="btn btn-success link-to-page">Complete</a>
         {% else %}
           <span style="color: green;">Done</span>
-          <a href="#" class="btn btn-secondary link-to-page">Undo</a>
+          <a href="{% url 'todo:completed-status-change' pk=task.id %}" class="btn btn-secondary link-to-page">Undo</a>
         {% endif %}
       </p>
 
@@ -48,8 +48,8 @@
         {% for tag in task.tags.all %}
           {{ tag.name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
-        <a href="#">Update</a>
-        <a href="#">Delete</a>
+        <a href="{% url 'todo:task-update' pk=task.id %}">Update</a>
+        <a href="{% url 'todo:task-delete' pk=task.id %}">Delete</a>
       </p>
           
       <hr>
