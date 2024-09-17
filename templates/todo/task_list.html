@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{#{% block content %}#}
+{#  <h1>#}
+{#    TODO List#}
+{#    <a href="#" class="btn btn-primary link-to-page">#}
+{#      Add task#}
+{#    </a>#}
+{#  </h1>#}
+{#  {% if task_list %}#}
+{#    <ul>#}
+{#      {% for task in task_list %}#}
+{#        {{ task.description }}#}
+{#      {% endfor %}#}
+{#    </ul>#}
+{#  {% else %}#}
+{#    <p>There are no tasks in the list</p>#}
+{#  {% endif %}#}
+{#{% endblock %}#}
+
+{% block content %}
+  <h1>
+    TODO List
+    <a href="#" class="btn btn-primary link-to-page">
+      Add task
+    </a>
+  </h1>
+  
+  <br>
+  
+  {% if task_list %}
+    {% for task in task_list %}
+      <p>
+        <strong>{{ task.description }}</strong>
+        {% if not task.completed %}
+          <span style="color: red;">Not done</span>
+          <a href="#" class="btn btn-success link-to-page">Complete</a>
+        {% else %}
+          <span style="color: green;">Done</span>
+          <a href="#" class="btn btn-secondary link-to-page">Undo</a>
+        {% endif %}
+      </p>
+
+      <p>Created: {{ task.created_at|date:"F j, Y, g:i a" }}</p>
+      
+      <p>
+        Tags: 
+        {% for tag in task.tags.all %}
+          {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        <a href="#">Update</a>
+        <a href="#">Delete</a>
+      </p>
+          
+      <hr>
+    {% endfor %}
+  {% else %}
+    <p>There are no tasks in the list</p>
+  {% endif %}
+{% endblock %}
