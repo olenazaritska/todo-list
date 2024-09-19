@@ -29,10 +29,7 @@ class TaskDeleteView(generic.DeleteView):
 
 def completed_status_change(request, pk):
     task = Task.objects.get(id=pk)
-    if task.completed is True:
-        task.completed = False
-    else:
-        task.completed = True
+    task.completed = not task.completed
     task.save()
     return HttpResponseRedirect(reverse_lazy("todo:task-list"))
 
