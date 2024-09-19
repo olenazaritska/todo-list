@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from todo.models import Task, Tag
-from todo.forms import TaskForm
+from todo.forms import TaskForm, TagForm
 
 
 class TaskListView(generic.ListView):
@@ -39,3 +39,9 @@ def completed_status_change(request, pk):
 
 class TagListView(generic.ListView):
     model = Tag
+
+
+class TagCreateView(generic.CreateView):
+    model = Tag
+    form_class = TagForm
+    success_url = reverse_lazy("todo:tag-list")
