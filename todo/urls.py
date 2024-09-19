@@ -7,6 +7,7 @@ from todo.views import (
     TaskUpdateView,
     TaskDeleteView,
     completed_status_change,
+    TagListView,
 )
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
         completed_status_change,
         name="completed-status-change"
     ),
+    path("tags/", TagListView.as_view(), name="tag-list"),
 ]
 
 app_name = "todo"

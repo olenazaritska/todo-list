@@ -1,9 +1,8 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from todo.models import Task
+from todo.models import Task, Tag
 from todo.forms import TaskForm
 
 
@@ -36,3 +35,7 @@ def completed_status_change(request, pk):
         task.completed = True
     task.save()
     return HttpResponseRedirect(reverse_lazy("todo:task-list"))
+
+
+class TagListView(generic.ListView):
+    model = Tag
