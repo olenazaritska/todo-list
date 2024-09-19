@@ -8,6 +8,7 @@ from todo.models import Task, Tag
 class TaskForm(forms.ModelForm):
     deadline = fields.DateTimeField(
         widget=DateTimeInput,
+        required=False,
     )
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
