@@ -23,8 +23,13 @@
         {% endif %}
       </p>
 
-      <p>Created: {{ task.created_at|date:"F j, Y, g:i a" }}</p>
-      
+      <p>
+        Created: {{ task.created_at|date:"F j, Y, g:i a" }}
+        {% if task.deadline %}
+          <span style="color: saddlebrown;">Deadline: {{ task.deadline|date:"F j, Y, g:i a" }}</span>
+        {% endif %}
+      </p>
+
       <p>
         Tags: 
         {% for tag in task.tags.all %}
